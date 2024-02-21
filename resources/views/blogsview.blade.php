@@ -67,7 +67,8 @@
                                                     <img src="{{ asset('storage/images/blogs/' . $blog->photo) }}"
                                                         alt="" class="img-fluid blog-image my-1 p-2">
                                                     <div class="card-text blog-content">{!! $blog->content !!}</div>
-                                                    <button class="btn btn-primary more-btn">Read more</button>
+                                                    <a href="{{ route('blog.show-content', ['id' => $blog->blog_id]) }}"
+                                                                target="blank"  class="btn btn-primary more-btn">Read more</a>
                                                     <div class="row justify-content-between mt-2 blog-action">
                                                         <div class="col-md-8 col-8 text-muted status">
                                                             {{ $blog->views . ' views' }}<span
@@ -315,48 +316,48 @@
                 }
             });
 
-            $('body').on('click', '.more-btn', function() {
-                console.log('hey');
-                var blogContent = $(this).prev('.blog-content');
-                blogContent.toggleClass("expanded");
-                var status = $(this).next('.blog-action').children('.status');
+            // $('body').on('click', '.more-btn', function() {
+            //     console.log('hey');
+            //     var blogContent = $(this).prev('.blog-content');
+            //     blogContent.toggleClass("expanded");
+            //     var status = $(this).next('.blog-action').children('.status');
 
 
-                var id = $(this).closest('.blog').data(id);
+            //     var id = $(this).closest('.blog').data(id);
 
 
-                if (blogContent.hasClass('expanded')) {
-                    $(this).html('See less');
-                    $.ajax({
-                        url: "{{ route('blog.view') }}",
-                        type: "POST",
-                        data: {
-                            id,
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: function(data) {
+            //     if (blogContent.hasClass('expanded')) {
+            //         $(this).html('See less');
+            //         $.ajax({
+            //             url: "{{ route('blog.view') }}",
+            //             type: "POST",
+            //             data: {
+            //                 id,
+            //                 _token: '{{ csrf_token() }}'
+            //             },
+            //             success: function(data) {
 
 
-                            var interaction = data.interaction;
+            //                 var interaction = data.interaction;
 
-                            var views = interaction.views;
-                            var likes = interaction.likes;
-                            status.html(views + ' views.' + likes + ' likes');
-
-
-                        },
-                        error: function(xhr, status, error) {
-                            console.log('Error:', xhr.responseText);
-                        }
+            //                 var views = interaction.views;
+            //                 var likes = interaction.likes;
+            //                 status.html(views + ' views.' + likes + ' likes');
 
 
-                    });
+            //             },
+            //             error: function(xhr, status, error) {
+            //                 console.log('Error:', xhr.responseText);
+            //             }
 
-                } else {
-                    $(this).html('Read more');
-                }
 
-            });
+            //         });
+
+            //     } else {
+            //         $(this).html('Read more');
+            //     }
+
+            // });
 
 
             $('body').on('click', '.like-btn', function(event) {

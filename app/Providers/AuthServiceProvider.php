@@ -37,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
                     ->where('blogs.blog_id','=',$blogId)
                     ->select('users.id','users.username','users.name','blogs.*')
                     ->first();
-            return $user->id==$author->id;
+            return $user->id==$author->id||$user->role=='admin';
         });
 
         //

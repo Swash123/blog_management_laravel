@@ -242,11 +242,19 @@ class BlogController extends Controller
         $id=Auth::id();
 
         if($id!=null){
+            
             $comment=new Comment();
             $comment->user_id=$id;
             $comment->blog_id=$blog_id;
             $comment->comment=$message;
             $comment->save();
+
+            Engagement::where('blog_id',$blog_id)
+                ->update([
+                    'comments'=> DB::raw('comments+1')
+                ]);
+
+
             $comment=DB::table('comments')
                         ->join('users','comments.user_id','=','users.id')
                         ->where('comments.id',$comment->id)
@@ -304,6 +312,12 @@ class BlogController extends Controller
             $reply->comment=$message;
             $reply->replied_to=$parentId;
             $reply->save();
+
+            Engagement::where('blog_id',$blog_id)
+                ->update([
+                    'comments'=> DB::raw('comments+1')
+                ]);
+
             $reply=DB::table('comments')
                         ->join('users','comments.user_id','=','users.id')
                         ->where('comments.id',$reply->id)
@@ -318,20 +332,20 @@ class BlogController extends Controller
 
     
     public function ajaxCanupdate(Request $request){
-        $id=Auth::id();
-        $blogId=$request['id'];
-        $author=DB::table('users')
-                    ->join('blogs','users.id','=','blogs.user_id')
-                    ->where('blogs.blog_id','=',$blogId)
-                    ->select('users.id','users.username','users.name','blogs.*')
-                    ->first();
-        if($id!=null){
-            $result=$id==$author->id;
-        }else{
-            $result= false;
-        }
-        $data=compact('result');
-        return $data;
+        $user=Auth::user();
+            $blogId=$request['id'];
+            $author=DB::table('users')
+                        ->join('blogs','users.id','=','blogs.user_id')
+                        ->where('blogs.blog_id','=',$blogId)
+                        ->select('users.id','users.username','users.name','blogs.*')
+                        ->first();
+            if($user){
+                $result=$user->id==$author->id||$user->role=='admin';
+            }else{
+                $result= false;
+            }
+            $data=compact('result');
+            return $data;
     }
 
     public function ajaxHasLiked(Request $request){

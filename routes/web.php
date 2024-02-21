@@ -81,3 +81,8 @@ Route::get('/admin/blogs/trend', [TrendingController::class,'show'])->name('admi
 Route::get('/admin/profile', [ProfileController::class,'show'])->name('admin.profile');
 
 Route::post('/users/pagination',[UsersController::class,'pagination'])->name('users.paginate');
+Route::post('/user/find',[UsersController::class,'find'])->name('user.find');
+Route::post('/user/add',[UsersController::class,'add'])->name('user.add');
+Route::post('/user/update',[UsersController::class,'update'])->name('user.update');
+Route::post('/user/delete',[UsersController::class,'delete'])->name('user.delete');
+

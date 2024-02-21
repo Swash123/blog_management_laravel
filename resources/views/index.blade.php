@@ -92,7 +92,7 @@
                                             </div>
                                             <img src="{{ asset('storage/images/blogs/' . $blog->photo) }}" alt=""
                                                 class="img-fluid my-1 p-2">
-                                            <p class="card-text blog-content">{!! $blog->content !!}</p>
+                                            <div class="card-text blog-content">{!! $blog->content !!}</div>
                                             <button class="btn btn-primary more-btn">Read more</button>
                                             <div class="row justify-content-between mt-2 blog-action">
                                                 <div class="col-md-8 col-8 text-muted status">
@@ -492,7 +492,7 @@
                                                     <h6 class="readable-date">${blog.readable}</h6>
                                                 </div>
                                                 <img src="${image}" alt="" class="img-fluid my-1 p-2">
-                                                <p class="card-text blog-content">${blog.content}</p>
+                                                <div class="card-text blog-content">${blog.content}</div>
                                                 <button class="btn btn-primary more-btn">Read more</button>
                                                 <div class="row justify-content-between mt-2 blog-action">
                                                     <div class="col-md-8 col-8 text-muted status">

@@ -69,8 +69,8 @@
             <div class="wrap">
                 <div class="container">
                     <div class="row justify-content-between">
-                        <div class="col">
-                            <p class="mb-0 phone"> <i class="fa-sharp fa-solid fa-envelope"></i><a
+                        <div class="col d-flex justify-content-start align-items-center">
+                            <p class="mb-0 email"> <i class="fa-sharp fa-solid fa-envelope"></i><a
                                     href="#">&nbsp;abc@gmail.com</a></p>
                         </div>
                         <div class="col d-flex justify-content-end">
